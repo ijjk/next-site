@@ -11,14 +11,7 @@ import { links } from '../../site-manifest';
 
 export function LogoContainer () {
   return (
-    <div style={{
-        position: 'sticky',
-        top: -5,
-        left: 0,
-        right: 0,
-        zIndex: 1000
-      }}>
-     
+    <div className='logo-wrapper'>
       <amp-animation id='logoAnim' layout='nodisplay'>
         {/* eslint-disable-next-line */}
         <script type="application/json" dangerouslySetInnerHTML={{
@@ -77,32 +70,40 @@ export function LogoContainer () {
         <Link href="/blog/next-8">
           <a className="version no-tap-highlight no-drag">8</a>
         </Link>
-        <style jsx>{`
-          .logo-main {
-            display: flex;
-            justify-content: center;
-            color: #0076ff;
-            width: 200px;
-            margin: 140px auto -210px;
-            z-index: 1000;
-          }
-          .logo-main .version {
-            width: 0;
-            // margin-left: -0.2rem;
-            margin-top: 0.4rem;
-            cursor: pointer;
-          }
-          a.version {
-            color: #0076ff;
-          }
-          // CSS only media query for mobile
-          @media screen and (max-width: 640px) {
-            .logo-main {
-              display: none;
-            }
-          }
-        `}</style>
       </div>
+      <style jsx>{`
+        .logo-wrapper {
+          position: -webkit-sticky;
+          position: sticky;
+          top: -5px;
+          left: 0;
+          right: 0;
+          z-index: 1000;
+        }
+        .logo-main {
+          display: flex;
+          justify-content: center;
+          color: #0076ff;
+          width: 200px;
+          margin: 140px auto -210px;
+          z-index: 1000;
+        }
+        .logo-main .version {
+          width: 0;
+          // margin-left: -0.2rem;
+          margin-top: 0.4rem;
+          cursor: pointer;
+        }
+        a.version {
+          color: #0076ff;
+        }
+        // CSS only media query for mobile
+        @media screen and (max-width: 640px) {
+          .logo-main {
+            display: none;
+          }
+        }
+      `}</style>
     </div>
   );
 }
