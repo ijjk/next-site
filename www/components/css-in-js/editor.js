@@ -1,5 +1,5 @@
 import React from 'react';
-import Highlight from 'react-highlight';
+import Highlight from '../highlight';
 
 import Window from '../window';
 import File from './svg/file';

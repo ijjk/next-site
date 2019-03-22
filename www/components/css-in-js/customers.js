@@ -1,4 +1,3 @@
-import { useAmp } from 'next/amp';
 import Container from '../container';
 import SectionHeader from '../section-header';
 import Carousel from '../carousel';
@@ -64,64 +63,11 @@ const slides = [
 ];
 
 export default () => {
-  const isAmp = useAmp();
   return (
     <Container padding wide>
       <div className="first col">
         <SectionHeader id="customers" title="Who's Using CSS-in-JS" />
-
-        {!isAmp && <Carousel slides={slides} />}
-        {isAmp && (
-          <div className="slideshow">
-            <amp-carousel
-              width="450px"
-              height="400px"
-              type="slides"
-              layout="responsive"
-            >
-              {slides.map(slide => (
-                <div className="slide">
-                  <a
-                    href={slide.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <amp-img
-                      src={slide.image}
-                      alt={slide.alt}
-                      height={300}
-                      width={450}
-                      layout="responsive"
-                    />
-
-                    {slide.logo}
-                  </a>
-                </div>
-              ))}
-            </amp-carousel>
-
-            <style jsx>{`
-              .slideshow {
-                width: 90%;
-                max-width: 650px;
-                margin: auto;
-                text-align: center;
-              }
-              .slide {
-                padding: 10px;
-              }
-              .slide :global(svg) {
-                margin-top: 50px;
-              }
-              amp-img {
-                margin: 10px;
-                border-radius: 7px;
-                box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.1),
-                  0px 10px 20px rgba(0, 0, 0, 0.08);
-              }
-            `}</style>
-          </div>
-        )}
+        <Carousel slides={slides} />
       </div>
     </Container>
   );

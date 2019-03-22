@@ -1,4 +1,4 @@
-import Highlight from 'react-highlight/lib/optimized';
+import Highlight from '../highlight';
 
 import { components as docsComponents } from '../docs/documentation';
 import { GenericLink } from '../text/link';

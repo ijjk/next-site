@@ -1,4 +1,4 @@
-import Highlight from 'react-highlight/lib/optimized';
+import Highlight from '../../highlight';
 
 export default ({ lang, children, style = {} }) => (
   <div className="f5 editor" style={{ padding: '1rem', ...style }}>
