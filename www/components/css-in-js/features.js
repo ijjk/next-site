@@ -1,10 +1,9 @@
 import React from 'react';
-import posed, { PoseGroup } from 'react-pose';
+import { useAmp } from 'next/amp';
 import Highlight from 'react-highlight';
 
 import Container from '../container';
 import Window from '../window';
-import Site from './svg/site';
 import TitleOverlay from './svg/title-overlay';
 import AvatarOverlay from './svg/avatar-overlay';
 import SidebarOverlay from './svg/sidebar-overlay';
@@ -59,31 +58,23 @@ const files = [
   }
 ];
 
-const Anim = posed.div({
-  enter: {
-    opacity: 1
-  },
-  exit: {
-    opacity: 0
-  }
-});
-
 export default () => {
-  const [selected, select] = React.useState(0);
-  const { name } = files[selected];
-
-  React.useEffect(() => {
-    if (window.innerWidth > 1023) {
-      const interval = setInterval(() => {
-        select(current => ++current % 3);
-      }, 3000);
-      return () => clearInterval(interval);
-    }
-  }, []);
+  const isAmp = useAmp();
+  const Img = props =>
+    React.createElement(isAmp ? 'amp-img' : 'img', {
+      ...props,
+      ...(isAmp
+        ? {
+            className: undefined
+          }
+        : {
+            width: undefined
+          })
+    });
 
   return (
     <Container wide dark>
-      <div className="col">
+      <div className="col features">
         <ul>
           <li>
             <Checkmark inverse />
@@ -105,53 +96,28 @@ export default () => {
 
         <div className="flex">
           <div className="terminal-container">
-            <Window title={name} height={297} backgroundColor="black">
-              <PoseGroup>
-                {selected === 0 && (
-                  <Anim key={0}>
-                    <Highlight className="javascript">
-                      {files[0].content}
-                    </Highlight>
-                  </Anim>
-                )}
-                {selected === 1 && (
-                  <Anim key={1}>
-                    <Highlight className="javascript">
-                      {files[1].content}
-                    </Highlight>
-                  </Anim>
-                )}
-                {selected === 2 && (
-                  <Anim key={2}>
-                    <Highlight className="javascript">
-                      {files[2].content}
-                    </Highlight>
-                  </Anim>
-                )}
-              </PoseGroup>
+            <Window height={297} backgroundColor="black" scroll={false}>
+              {files.map((file, idx) => (
+                <Highlight
+                  key={idx}
+                  className={`javascript slide slide-${idx}`}
+                >
+                  {file.content}
+                </Highlight>
+              ))}
             </Window>
           </div>
 
           <div className="site-container">
-            <Site />
+            <Img src="/static/images/site.png" height={297} width={472} />
             <div className="overlay-container">
-              <PoseGroup>
-                {selected === 0 && (
-                  <Anim key={0}>
-                    <AvatarOverlay />
-                  </Anim>
-                )}
-                {selected === 1 && (
-                  <Anim key={1}>
-                    <TitleOverlay />
-                  </Anim>
-                )}
-                {selected === 2 && (
-                  <Anim key={2}>
-                    <SidebarOverlay />
-                  </Anim>
-                )}
-              </PoseGroup>
+              {[AvatarOverlay, TitleOverlay, SidebarOverlay].map(
+                (overlay, idx) => (
+                  <div key={idx} className={`slide slide-${idx}`}>
+                    {React.createElement(overlay, {})}
+                  </div>
+                )
+              )}
             </div>
           </div>
         </div>
@@ -225,6 +191,83 @@ export default () => {
           .terminal-container :global(.hljs-name),
           .terminal-container :global(.hljs-tag) {
             font-weight: 600;
+          }
+
+          .features :global(.slide) {
+            height: 0px;
+            display: block;
+            overflow: hidden;
+          }
+          .features :global(.slide-0) {
+            animation: slideAnim1 9000ms ease infinite;
+          }
+          .features :global(.slide-1) {
+            animation: slideAnim2 9000ms ease infinite;
+          }
+          .features :global(.slide-2) {
+            animation: slideAnim3 9000ms ease infinite;
+          }
+
+          @keyframes slideAnim1 {
+            0% {
+              opacity: 1;
+              height: unset;
+            }
+            27.9% {
+              opacity: 1;
+              height: unset;
+            }
+            28% {
+              opacity: 0;
+              height: 0px;
+            }
+            99% {
+              height: 0px;
+            }
+          }
+          @keyframes slideAnim2 {
+            0% {
+              opacity: 0;
+              height: 0px;
+            }
+            27.9% {
+              opacity: 0;
+              height: unset;
+            }
+            38% {
+              opacity: 1;
+              height: unset;
+            }
+            54.9% {
+              opacity: 1;
+              height: unset;
+            }
+            55% {
+              opacity: 0;
+              height: 0px;
+            }
+          }
+          @keyframes slideAnim3 {
+            0% {
+              opacity: 0;
+              height: 0px;
+            }
+            55% {
+              opacity: 0;
+              height: unset;
+            }
+            66% {
+              opacity: 1;
+              height: unset;
+            }
+            99.8% {
+              opacity: 1;
+              height: unset;
+            }
+            99.9% {
+              opacity: 0;
+              height: 0px;
+            }
           }
 
           @media screen and (max-width: 1023px) {

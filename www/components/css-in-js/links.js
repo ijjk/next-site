@@ -159,9 +159,9 @@ export default () => (
             flex-direction: column-reverse;
           }
           .col {
-            height: auto !important;
+            height: auto;
             max-width: 30rem;
-            margin: 4rem auto !important;
+            margin: 4rem auto;
             padding: 0 1rem;
           }
           .list-container {
