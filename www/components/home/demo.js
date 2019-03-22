@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { useAmp } from 'next/amp';
 import Container from '../container';
 import Tabs from '../tabs';
 import Editor from './editor';
@@ -12,10 +13,11 @@ const DEMO_DATA = {
 };
 
 export default function Demo() {
+  const isAmp = useAmp();
   return (
     <Container center dark wide role="region">
       <Container center>
-        <Tabs data={Object.keys(DEMO_DATA)} anchor>
+        <Tabs ampKey="demoTabs" data={Object.keys(DEMO_DATA)} anchor>
           {(onSelect, selectedId) => (
             <div>
               <style jsx>{`
@@ -62,7 +64,14 @@ export default function Demo() {
                       className="tab"
                       key={`tab-${id}`}
                       selected={selectedId === id}
-                      onClick={() => onSelect(id)}
+                      onClick={isAmp ? undefined : () => onSelect(id)}
+                      on={
+                        isAmp
+                          ? `tap:AMP.setState({ demoTabs: { selected: ${JSON.stringify(
+                              id
+                            )} } })`
+                          : undefined
+                      }
                     >
                       {id}
                     </TabButton>
@@ -86,7 +95,12 @@ export default function Demo() {
                   invert
                   className="tab"
                   selected={selectedId === 'More...'}
-                  onClick={() => onSelect('More...')}
+                  onClick={isAmp ? undefined : () => onSelect('More...')}
+                  on={
+                    isAmp
+                      ? `tap:AMP.setState({ demoTabs: { selected: 'More...' } })`
+                      : undefined
+                  }
                 >
                   {'More...'}
                 </TabButton>
@@ -98,10 +112,15 @@ export default function Demo() {
                     return dataShort.body || null;
                   }
 
+                  const uniqueId = 'a'.concat(
+                    Math.random()
+                      .toString(36)
+                      .substring(2, 15)
+                  );
                   return (
                     <div className="column">
-                      <Tabs data={dataShort.tabs}>
-                        {(onSelect, _selectedId, selectedIndex) => {
+                      <Tabs ampKey={uniqueId} data={dataShort.tabs}>
+                        {(onSelect, _selectedId) => {
                           let content = null;
                           const data = DEMO_DATA[selectedId];
                           if (_selectedId === data.tabs[0]) {
@@ -127,7 +146,18 @@ export default function Demo() {
                                 invert
                                 light
                                 selected={_selectedId === data.tabs[0]}
-                                onClick={() => onSelect(data.tabs[0])}
+                                onClick={
+                                  isAmp
+                                    ? undefined
+                                    : () => onSelect(data.tabs[0])
+                                }
+                                on={
+                                  isAmp
+                                    ? `tap:AMP.setState({ ${uniqueId}: { selected: ${JSON.stringify(
+                                        data.tabs[0]
+                                      )} } })`
+                                    : undefined
+                                }
                               >
                                 {data.tabs[0]}
                               </TabButton>
@@ -135,7 +165,18 @@ export default function Demo() {
                                 invert
                                 light
                                 selected={_selectedId === data.tabs[1]}
-                                onClick={() => onSelect(data.tabs[1])}
+                                onClick={
+                                  isAmp
+                                    ? undefined
+                                    : () => onSelect(data.tabs[1])
+                                }
+                                on={
+                                  isAmp
+                                    ? `tap:AMP.setState({ ${uniqueId}: { selected: ${JSON.stringify(
+                                        data.tabs[1]
+                                      )} } })`
+                                    : undefined
+                                }
                               >
                                 {data.tabs[1]}
                               </TabButton>

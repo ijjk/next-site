@@ -1,8 +1,16 @@
 import classNames from 'classnames';
-
+import { useAmp } from 'next/amp';
 import Tabs from '../tabs';
 
-export default ({ data, children }) => {
+export default ({
+  uniqueId = 'a'.concat(
+    Math.random()
+      .toString(36)
+      .substring(2, 15)
+  ),
+  data
+}) => {
+  const isAmp = useAmp();
   return (
     <div className="editor">
       <style jsx>{`
@@ -75,8 +83,8 @@ export default ({ data, children }) => {
           -webkit-overflow-scrolling: touch;
         }
       `}</style>
-      <Tabs data={data.editorTabs}>
-        {(onSelect, selectedFile, selectedIndex) => (
+      <Tabs ampKey={uniqueId} data={data.editorTabs}>
+        {(onSelect, selectedFile) => (
           <>
             <div className="header">
               <div className="button-group">
@@ -87,11 +95,19 @@ export default ({ data, children }) => {
               <div className="title f6 no-drag">
                 {data.editorTabs.map(file => (
                   <button
+                    type="button"
                     key={file}
                     className={classNames('tab', {
                       selected: selectedFile === file
                     })}
-                    onClick={() => onSelect(file)}
+                    onClick={isAmp ? undefined : () => onSelect(file)}
+                    on={
+                      isAmp
+                        ? `tap:AMP.setState({ ${uniqueId}: { selected: ${JSON.stringify(
+                            file
+                          )} } })`
+                        : undefined
+                    }
                   >
                     {file}
                   </button>
@@ -100,7 +116,7 @@ export default ({ data, children }) => {
             </div>
             <div className="content">
               {(() => {
-                let SelectedFile = data.editorMapping[selectedFile];
+                const SelectedFile = data.editorMapping[selectedFile];
                 return <SelectedFile />;
               })()}
             </div>

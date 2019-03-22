@@ -1,13 +1,55 @@
-const makeLink = onSelect => ({ tab, children }) => (
-  <a href="javascript:;" onClick={() => onSelect(tab)}>
-    {children}
-  </a>
-);
+import { useAmp } from 'next/amp';
 
-export default Comp => ({ onSelect }) => (
+const makeLink = (onSelect, ampKey) => ({ tab, children }) => {
+  const isAmp = useAmp();
+
+  if (isAmp) {
+    return (
+      <>
+        <button
+          type="button"
+          on={`tap:AMP.setState({ ${ampKey}: { selected: ${JSON.stringify(
+            tab
+          )} } })`}
+        >
+          {children}
+        </button>
+        <style jsx>{`
+          button {
+            align-items: normal;
+            background-color: rgba(0, 0, 0, 0);
+            border-color: rgb(0, 0, 238);
+            border-style: none;
+            box-sizing: content-box;
+            color: rgb(0, 0, 238);
+            cursor: pointer;
+            display: inline;
+            font: inherit;
+            height: auto;
+            padding: 0;
+            perspective-origin: 0 0;
+            text-align: start;
+            text-decoration: underline;
+            transform-origin: 0 0;
+            width: auto;
+          }
+        `}</style>
+      </>
+    );
+  }
+
+  return (
+    // eslint-disable-next-line no-script-url
+    <a href="javascript:;" onClick={() => onSelect(tab)}>
+      {children}
+    </a>
+  );
+};
+
+export default Comp => ({ onSelect, ampKey }) => (
   <div style={{ margin: 8 }}>
     <div style={{ all: 'initial' }}>
-      <Comp A={makeLink(onSelect)} />
+      <Comp A={makeLink(onSelect, ampKey)} />
     </div>
   </div>
 );

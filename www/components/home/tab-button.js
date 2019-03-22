@@ -6,15 +6,20 @@ export default function TabButton({
   invert,
   selected,
   onClick,
+  on,
+  type,
   children
 }) {
   return (
+    // eslint-disable-next-line react/button-has-type
     <button
       className={classNames('fw4 no-drag no-tap-highlight', {
         selected,
         f5: small
       })}
       onClick={onClick}
+      on={on}
+      type={type}
     >
       <style jsx>{`
         button {
