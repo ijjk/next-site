@@ -1,3 +1,4 @@
+import { useAmp } from 'next/amp';
 import Container from '../container';
 import SectionHeader from '../section-header';
 import Carousel from '../carousel';
@@ -63,11 +64,12 @@ const slides = [
 ];
 
 export default () => {
+  const isAmp = useAmp();
   return (
     <Container padding wide>
       <div className="first col">
         <SectionHeader id="customers" title="Who's Using CSS-in-JS" />
-        <Carousel slides={slides} />
+        <Carousel slides={slides} isAmp={isAmp} />
       </div>
     </Container>
   );
