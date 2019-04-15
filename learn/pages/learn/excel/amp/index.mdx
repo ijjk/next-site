@@ -1,0 +1,22 @@
+import Layout from '~/components/Layout'
+
+export const meta = {
+  title: 'Create AMP Pages',
+  courseId: 'excel',
+  lessonId: 'amp'
+}
+
+Next.js supports hybrid and AMP only pages, this tutorial shows you how to use both.
+
+First to get started you need to enable AMP support in your `next.config.js` like this:
+
+```js
+// next.config.js
+module.exports = {
+  experimental: {
+    amp: true
+  }
+}
+```
+
+export default ({ children }) => <Layout meta={meta}>{children}</Layout>

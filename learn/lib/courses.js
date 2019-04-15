@@ -404,6 +404,20 @@ const courses = [
             points: 5
           }
         ]
+      },
+      {
+        id: 'amp',
+        name: 'Create AMP Pages',
+        steps: [
+          {
+            id: 'amp-only',
+            points: 5
+          },
+          {
+            id: 'hybrid-amp',
+            points: 5
+          }
+        ]
       }
     ]
   }
