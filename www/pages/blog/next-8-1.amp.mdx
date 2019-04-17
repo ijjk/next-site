@@ -6,9 +6,16 @@ import { TerminalInput } from '../../components/text/terminal'
 
 export default withPost({ ...meta })
 
+Today, we're excited to announce we've extended the Next.js experience to authoring AMP pages.
+- [What is AMP](#what-is-amp)
+- [AMP in Next.js](#amp-in-next.js)
+- [Hybrid AMP pages](#hybrid-amp-pages)
+- [AMP-only pages](#amp-only-pages)
+- [AMP Validation](#amp-validation)
+
 ## What is AMP?
 
-AMP is a standard for building high-performance websites that minimizes rendering overhead and can be indexed on well-known search engines with enhanced behavior. For example, AMP pages are loaded directly into Google's mobile search results and are marked by a lightning icon.
+AMP is a standard for building high-performance websites that minimizes rendering overhead and can be indexed on well known search engines with enhanced behavior. For example, AMP pages are loaded directly into Google's mobile search results and are marked by a lightning icon.
 
 <Image
   caption={<>Next.js Google search result</>}
@@ -18,32 +25,19 @@ AMP is a standard for building high-performance websites that minimizes renderin
   height={487 / 2.5}
 />
 
-AMP HTML is a stricter version of HTML that imposes a few restrictions to achieve more reliable performance and better scalability. Some HTML tags are replaced with AMP-specific HTML tags to provide a better experience than its corresponding HTML tag. For example, the `[amp-img](https://amp.dev/documentation/components/amp-img)` tag provides full `srcset` support even in browsers that don’t support it yet.
+AMP HTML is a stricter version of HTML that imposes a few restrictions to achieve more reliable performance and better scalability. Some HTML tags are replaced with AMP-specific HTML tags to provide a better experience than its corresponding HTML tag. For example, the [`amp-img`](https://amp.dev/documentation/components/amp-img) tag provides full `srcset` support even in browsers that don’t support it yet.
 
-AMP pages are automatically discovered by search engines which support it. These search engines generally implement [an AMP Cache](https://amp.dev/documentation/guides-and-tutorials/learn/amp-caches-and-cors/how_amp_pages_are_cached) (e.g. [Google](https://developers.google.com/amp/cache/) and [Bing](https://www.bing.com/webmaster/help/bing-amp-cache-bc1c884c)). AMP Caches help the page to render faster from their search results.
+AMP pages are automatically discovered by search engines which support it. These search engines generally implement an [AMP Cache](https://amp.dev/documentation/guides-and-tutorials/learn/amp-caches-and-cors/how_amp_pages_are_cached) (e.g. [Google](https://developers.google.com/amp/cache/) and [Bing](https://www.bing.com/webmaster/help/bing-amp-cache-bc1c884c)). AMP Caches help the page to render faster from their search results.
 
 ## AMP in Next.js
 
-Today, we're excited to announce we've extended the Next.js experience to authoring AMP pages.
-
-This means that you can now leverage the power of React components to create AMP pages.
-
-AMP support is defined on a per-page basis, allowing incremental adoption of AMP.
-
-There are two ways to enable AMP in Next.js: a Hybrid AMP page or an AMP-only page.
+Today, we're excited to announce we've extended the Next.js experience to authoring AMP pages. This means that you can now leverage the power of React components to create AMP pages. AMP support is defined on a per-page basis, allowing incremental adoption of AMP. There are two ways to enable AMP in Next.js: a Hybrid AMP page or an AMP-only page.
 
 ## Hybrid AMP Pages
 
-Hybrid AMP pages allow you to have an accompanying AMP version of a traditional page.
+Hybrid AMP pages allow you to have an accompanying AMP version of a traditional page so search engines can show the AMP version of the page in the mobile search results while maintaining the existing version of the page. This enables the use of AMP into your application while still making use of Next.js features like client-side routing for the main user experience.
 
-This allows for search engines to show the AMP version of the page in the mobile search results while maintaining the existing version of the page.
-
-This allows the use of AMP into your application while still making use of Next.js features like client-side routing for the main user experience.
-
-To opt-in to a hybrid AMP page use the `withAmp` function while providing the `hybrid: true` option.
-
-`withAmp` can be used on pages in the pages directory to enable hybrid AMP:
-
+To opt-in to a hybrid AMP page use the `withAmp` function while providing the `hybrid: true` option:
 ```js
 // pages/index.js
 function HomePage() {
@@ -73,9 +67,7 @@ One example of the hybrid AMP pattern being used in production is Reddit. Each t
 
 ### AMP-Only Pages
 
-AMP-only pages are served to the website's primary traffic as well as search engine traffic.
-
-By using AMP-only pages, we bring the fast experience of AMP to the main website, including desktop.
+AMP-only pages are served to the website's primary traffic as well as search engine traffic. By using AMP-only pages, we bring the fast experience of AMP to the main website, including desktop.
 
 To implement to AMP-only pages, you wrap pages with the `withAmp` function:
 
@@ -88,15 +80,11 @@ function HomePage() {
 export default withAmp(HomePage)
 ```
 
-If you don't have a need for the Next.js runtime, using AMP-only pages could help speed up development. AMP-only requires you to only use AMP compatible components to build your pages.
-
-AMP-only pages are currently in production on [nextjs.org](http://nextjs.org)/docs and [nextjs.org/blog](http://nextjs.org/blog).
+If you don't have a need for the Next.js runtime, using AMP-only pages could help speed up development. AMP-Only requires you to only use AMP compatible components to build your pages. AMP-Only pages are currently in production on [nextjs.org/docs](http://nextjs.org/docs) and [nextjs.org/blog](http://nextjs.org/blog).
 
 ### Distinguishing AMP Rendering in Components
 
-Any React component in your project can leverage `useAmp` to distinguish between AMP and non-AMP rendering mode.
-
-This allows you to implement an `<Image>` component that shares logic between `<img>` and `<amp-img>`:
+Any React component in your project can leverage `useAmp` to distinguish between AMP and non-AMP rendering mode. This allows you to implement an `<Image>` component that shares logic between `<img>` and `<amp-img>`:
 
 ```js
 // components/image.js
