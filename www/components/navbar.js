@@ -149,16 +149,15 @@ function Navbar({ className, hideLogo, route, isMobile }) {
                 Learn
               </a>
             </Link>
-            <Link href="/docs">
-              <a
-                className={classNames({
-                  selected: route.startsWith('/docs')
-                })}
-                title="Documentation"
-              >
-                Docs
-              </a>
-            </Link>
+            <a
+              href="/docs"
+              className={classNames({
+                selected: route.startsWith('/docs')
+              })}
+              title="Documentation"
+            >
+              Docs
+            </a>
             <Link href="/showcase" prefetch>
               <a
                 className={classNames({
@@ -169,16 +168,15 @@ function Navbar({ className, hideLogo, route, isMobile }) {
                 Showcase
               </a>
             </Link>
-            <Link href="/blog">
-              <a
-                className={classNames({
-                  selected: route.startsWith('/blog')
-                })}
-                title="Blog"
-              >
-                Blog
-              </a>
-            </Link>
+            <a
+              href="/blog"
+              className={classNames({
+                selected: route.startsWith('/blog')
+              })}
+              title="Blog"
+            >
+              Blog
+            </a>
             {
               // <Link href="/enterprise" prefetch><a className={classNames({ selected: route.startsWith('/enterprise') })} title='Enterprise'>Enterprise</a></Link>
             }
@@ -300,16 +298,15 @@ function Navbar({ className, hideLogo, route, isMobile }) {
               Learn
             </a>
           </Link>
-          <Link href="/docs">
-            <a
-              className={classNames('mute', {
-                selected: route.startsWith('/docs')
-              })}
-              title="Documentation"
-            >
-              Docs
-            </a>
-          </Link>
+          <a
+            href="/docs"
+            className={classNames('mute', {
+              selected: route.startsWith('/docs')
+            })}
+            title="Documentation"
+          >
+            Docs
+          </a>
         </div>
         {!hideLogo && (
           <div className="logo">
@@ -331,15 +328,14 @@ function Navbar({ className, hideLogo, route, isMobile }) {
               Showcase
             </a>
           </Link>
-          <Link href="/blog">
-            <a
-              className={classNames('mute', {
-                selected: route.startsWith('/blog')
-              })}
-            >
-              Blog
-            </a>
-          </Link>
+          <a
+            href="/blog"
+            className={classNames('mute', {
+              selected: route.startsWith('/blog')
+            })}
+          >
+            Blog
+          </a>
           {
             // <Link href="/enterprise" prefetch><a className={classNames('mute', { selected: route.startsWith('/enterprise') })}>Enterprise</a></Link>
           }

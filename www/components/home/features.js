@@ -15,7 +15,7 @@ export default function Features() {
         <div className="row">
           <div className="column">
             <h3 className="f3 fw6">
-              <Button href="/features/server-side-rendering">
+              <Button href="/features/server-side-rendering" amp>
                 Server Rendering
               </Button>
             </h3>
@@ -26,7 +26,7 @@ export default function Features() {
           </div>
           <div className="column">
             <h3 className="f3 fw6">
-              <Button href="/features/static-exporting">
+              <Button href="/features/static-exporting" amp>
                 Static Exporting
               </Button>
             </h3>
@@ -37,7 +37,9 @@ export default function Features() {
           </div>
           <div className="column">
             <h3 className="f3 fw6">
-              <Button href="/features/css-in-js">CSS-in-JS</Button>
+              <Button href="/features/css-in-js" amp>
+                CSS-in-JS
+              </Button>
             </h3>
             <p>
               Next.js comes with <code>styled-jsx</code> included, but it also
@@ -60,7 +62,9 @@ export default function Features() {
               Complete control over Babel and Webpack. Customizable server,
               routing and next-plugins.
             </p>
-            <Button href="/docs">View Full Documentation</Button>
+            <Button href="/docs" amp>
+              View Full Documentation
+            </Button>
           </div>
           <div className="column">
             <h3 className="f3 fw6">Ready for Production</h3>

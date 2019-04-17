@@ -1,31 +1,32 @@
-import { SkipNavContent } from '@reach/skip-nav';
+import { SkipNavContent } from '@reach/skip-nav'
+import { withAmp } from 'next/amp'
 
-import Header from '../../components/header';
-import Footer from '../../components/footer';
-import Navbar from '../../components/navbar';
-import Screen from '../../components/screen';
-import Page from '../../components/page';
+import Header from '../../components/header'
+import Footer from '../../components/footer'
+import Navbar from '../../components/navbar'
+import Screen from '../../components/screen'
+import Page from '../../components/page'
 
-import Container from '../../components/container';
-import SectionHeader from '../../components/section-header';
+import Container from '../../components/container'
+import SectionHeader from '../../components/section-header'
 
-import Preview from '../../components/blog/preview';
-import { components } from '../../components/blog/post-components';
+import Preview from '../../components/blog/preview'
+import { components } from '../../components/blog/post-components'
 
 function importAll(r) {
-  return r.keys().map(r);
+  return r.keys().map(r)
 }
 
 const previewItems = importAll(
   require.context('../../blog', false, /\-preview\.mdx$/)
-);
+)
 
 function dateSortDesc(a, b) {
-  const date1 = new Date(a.meta.date);
-  const date2 = new Date(b.meta.date);
-  if (date1 > date2) return -1;
-  if (date1 < date2) return 1;
-  return 0;
+  const date1 = new Date(a.meta.date)
+  const date2 = new Date(b.meta.date)
+  if (date1 > date2) return -1
+  if (date1 < date2) return 1
+  return 0
 }
 
 const items = previewItems
@@ -40,10 +41,10 @@ const items = previewItems
       >
         <Component components={components} />
       </Preview>
-    );
-  });
+    )
+  })
 
-export default () => (
+export default withAmp(() => (
   <>
     <Header height={{ desktop: 64, mobile: 64 + 32 }} shadow defaultActive>
       <Navbar />
@@ -59,4 +60,4 @@ export default () => (
       <Footer />
     </Page>
   </>
-);
+))

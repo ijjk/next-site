@@ -48,13 +48,14 @@ export default withPure(function Button({
   as,
   className,
   prefetch,
+  amp,
   ...props
 }) {
   const cachedClassNames = classNames(className, 'btn', 'fw4 no-drag', {
     invert
   });
   const a = (
-    <a className={cachedClassNames} {...props}>
+    <a className={cachedClassNames} href={href} {...props}>
       {children}
       <style jsx>{cachedStyles}</style>
     </a>
@@ -66,11 +67,15 @@ export default withPure(function Button({
       <style jsx>{cachedStyles}</style>
     </button>
   );
-  return href ? (
-    <Link href={href} as={as} prefetch={prefetch}>
-      {a}
-    </Link>
-  ) : (
-    btn
-  );
+
+  if (href) {
+    return amp ? (
+      a
+    ) : (
+      <Link href={href} as={as} prefetch={prefetch}>
+        {a}
+      </Link>
+    );
+  }
+  return btn;
 });
