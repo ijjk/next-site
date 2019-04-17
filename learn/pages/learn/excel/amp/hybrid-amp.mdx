@@ -1,0 +1,36 @@
+import Layout from '~/components/Layout'
+
+export const meta = {
+  title: 'Build a hybrid AMP Page',
+  courseId: 'excel',
+  lessonId: 'amp',
+  stepId: 'hybrid-amp',
+  question: {
+    answers: [
+      'Set hybrid in your next.config.js',
+      'Put it in the hybrid-amp folder',
+      'Add ?amp=1 to your URL',
+      'Add `?hybrid=true`'
+    ],
+    correctAnswer: 'Add ?amp=1 to your URL'
+  }
+}
+
+Using `withAmp` you can also create a hybrid AMP page by supplying your page's component as the first parameter to `withAmp` and a second parameter of `{ hybrid: true }`. To view the AMP version of the page you use add `?amp=1` to your URL.
+
+```js
+// pages/about.js
+import { withAmp, useAmp } from 'next/amp'
+
+export default withAmp(
+  function About(props) {
+    const isAmp = useAmp()
+    return <p>Welcome to the {isAmp ? 'AMP' : 'normal'} version of the About page!!</p>
+  },
+  { hybrid: true }
+)
+```
+
+How do you visit the AMP version of an AMP page.
+
+export default ({ children }) => <Layout meta={meta}>{children}</Layout>

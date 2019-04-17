@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { useAmp } from 'next/amp';
+import { useAmp, withAmp } from 'next/amp';
 
 import Page from '../../components/page';
 import Header from '../../components/header';
@@ -15,7 +15,7 @@ import Libraries from '../../components/css-in-js/libraries';
 import Docs from '../../components/css-in-js/docs';
 import Customers from '../../components/css-in-js/customers';
 
-export default () => {
+export default withAmp(() => {
   const isAmp = useAmp();
   return (
     <Page>
@@ -59,4 +59,4 @@ export default () => {
       </style>
     </Page>
   );
-};
+});

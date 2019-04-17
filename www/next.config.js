@@ -34,8 +34,7 @@ const withMDX = nextMDX({
 const { mapping: showcaseMapping } = require('./showcase-manifest');
 const webpack = require('webpack');
 
-var config = {
-  experimental: { amp: true },
+let config = {
   pageExtensions: ['jsx', 'js', 'mdx'],
   webpack: (config, { dev, isServer }) => {
     config.plugins = config.plugins || [];

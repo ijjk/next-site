@@ -1,3 +1,4 @@
+import { withAmp } from 'next/amp';
 import Page from '../../components/page';
 import Header from '../../components/header';
 import Navbar from '../../components/navbar';
@@ -8,12 +9,12 @@ import Hero from '../../components/progressive-web-apps/hero';
 import OfflineSupport from '../../components/progressive-web-apps/offline-support';
 import Learn from '../../components/progressive-web-apps/learn';
 import Features from '../../components/progressive-web-apps/features';
-import Benefits from '../../components/progressive-web-apps/benefits'
+import Benefits from '../../components/progressive-web-apps/benefits';
 import Customers from '../../components/progressive-web-apps/customers';
 
-const title = "Features - Progressive Web Apps | Next.js"
+const title = 'Features - Progressive Web Apps | Next.js';
 
-export default () => (
+export default withAmp(() => (
   <Page title={title}>
     <SocialMeta
       title={title}
@@ -43,4 +44,4 @@ export default () => (
       `}
     </style>
   </Page>
-);
+));

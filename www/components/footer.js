@@ -62,62 +62,40 @@ export default withPure(() => (
         <div className="row f5">
           <div className="column">
             <h4 className="fw5">
-              <Link href="/docs">
-                <a>Docs</a>
-              </Link>
+              <a href="/docs">Docs</a>
             </h4>
             <p>
-              <Link href="/docs#setup">
-                <a>Setup</a>
-              </Link>
+              <a href="/docs#setup">Setup</a>
             </p>
             <p>
-              <Link href="/docs#custom-configuration">
-                <a>Configuration</a>
-              </Link>
+              <a href="/docs#custom-configuration">Configuration</a>
             </p>
             <p>
-              <Link href="/docs#static-html-export">
-                <a>Static Export</a>
-              </Link>
+              <a href="/docs#static-html-export">Static Export</a>
             </p>
             <p>
-              <Link href="/docs#recipes">
-                <a>Recipes</a>
-              </Link>
+              <a href="/docs#recipes">Recipes</a>
             </p>
             <p>
-              <Link href="/docs#faq">
-                <a>FAQ</a>
-              </Link>
+              <a href="/docs#faq">FAQ</a>
             </p>
             <p>
-              <Link href="/docs#contributing">
-                <a>Contributing</a>
-              </Link>
+              <a href="/docs#contributing">Contributing</a>
             </p>
           </div>
           <div className="column">
             <h4 className="fw5">Features</h4>
             <p>
-              <Link href="/features/server-side-rendering">
-                <a>SSR</a>
-              </Link>
+              <a href="/features/server-side-rendering">SSR</a>
             </p>
             <p>
-              <Link href="/features/static-exporting">
-                <a>Static Exporting</a>
-              </Link>
+              <a href="/features/static-exporting">Static Exporting</a>
             </p>
             <p>
-              <Link href="/features/css-in-js">
-                <a>CSS-in-JS</a>
-              </Link>
+              <a href="/features/css-in-js">CSS-in-JS</a>
             </p>
             <p>
-              <Link href="/features/progressive-web-apps">
-                <a>PWA</a>
-              </Link>
+              <a href="/features/progressive-web-apps">PWA</a>
             </p>
           </div>
           <div className="column">
@@ -142,9 +120,7 @@ export default withPure(() => (
               </Link>
             </h4>
             <h4 className="fw5">
-              <Link href="/blog">
-                <a>Blog</a>
-              </Link>
+              <a href="/blog">Blog</a>
             </h4>
           </div>
           <div className="column">

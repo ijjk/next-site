@@ -14,13 +14,7 @@ export default function Documentation({ children, headings }) {
       <div className="documentation">
         <Sidebar headings={headings} desktop />
         <div className="documentation__container">
-          <div
-            className="documentation__content"
-            // eslint-disable-next-line no-return-assign
-            ref={ref => (this.contentNode = ref)}
-          >
-            {children}
-          </div>
+          <div className="documentation__content">{children}</div>
         </div>
 
         <style jsx>{`

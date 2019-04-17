@@ -1,0 +1,32 @@
+import Layout from '~/components/Layout'
+
+export const meta = {
+  title: 'Build an AMP only Page',
+  courseId: 'excel',
+  lessonId: 'amp',
+  stepId: 'amp-only',
+  question: {
+    answers: [
+      'Use page.amp.js',
+      'Use page-amp.js',
+      "Wrap your page's component with `withAmp()`",
+      'Set AMP mode in your next.config'
+    ],
+    correctAnswer: "Wrap your page's component with `withAmp()`"
+  }
+}
+
+Using `withAmp` you can create an AMP only page by supplying your page's component as the parameter to `withAmp`.
+
+```js
+// pages/about.js
+import { withAmp } from 'next/amp'
+
+export default withAmp(function About(props) {
+  return <p>Welcome to the AMP only About page!!</p>
+})
+```
+
+How do you make an AMP only page?
+
+export default ({ children }) => <Layout meta={meta}>{children}</Layout>

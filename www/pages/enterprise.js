@@ -1,3 +1,4 @@
+import { withAmp } from 'next/amp';
 import Page from '../components/page';
 import Screen from '../components/screen';
 import Header from '../components/header';
@@ -6,7 +7,7 @@ import Navbar from '../components/navbar';
 
 import Contact from '../components/enterprise/contact';
 
-export default () => (
+export default withAmp(() => (
   <Page title="Enterprise | Next.js">
     <Header height={64} shadow defaultActive>
       <Navbar />
@@ -16,4 +17,4 @@ export default () => (
     </Screen>
     <Footer />
   </Page>
-);
+));

@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Head from 'next/head';
 import { MDXProvider } from '@mdx-js/tag';
 import formatDate from 'date-fns/format';
-import { useAmp } from 'next/amp';
+import { useAmp, withAmp } from 'next/amp';
 
 import Header from '../header';
 import Footer from '../footer';
@@ -116,108 +116,118 @@ const HeaderImage = meta => {
   return null;
 };
 
-export default meta => ({ children }) => {
-  const date = meta.date ? new Date(meta.date) : new Date();
+export default meta =>
+  withAmp(({ children }) => {
+    const date = meta.date ? new Date(meta.date) : new Date();
 
-  return (
-    <MDXProvider components={components}>
-      <Page title={`Blog - ${meta.title} | Next.js`}>
-        <SocialMeta image={`/static${meta.link}/twitter-card.png`} {...meta} />
-        <Header height={{ desktop: 64, mobile: 64 + 32 }} shadow defaultActive>
-          <Navbar />
-        </Header>
-        <HeaderImage {...meta} />
-        <Head>
-          <script
-            async
-            key="amp-timeago"
-            custom-element="amp-timeago"
-            src="https://cdn.ampproject.org/v0/amp-timeago-0.1.js"
+    return (
+      <MDXProvider components={components}>
+        <Page title={`Blog - ${meta.title} | Next.js`}>
+          <SocialMeta
+            image={`/static${meta.link}/twitter-card.png`}
+            {...meta}
           />
-        </Head>
-        <Container padding>
-          <h1 className="title fw6 f0">{meta.title}</h1>
-          {meta.type && <span className="post-type mute fw7">{meta.type}</span>}
-          <div className="date mute f6">
-            <time dateTime={meta.date}>
-              {formatDate(date, 'dddd, MMMM Do YYYY')} (
-              <amp-timeago
-                width="0"
-                height="15"
-                datetime={meta.date}
-                layout="responsive"
-              >
-                .
-              </amp-timeago>
-              )
-            </time>
-          </div>
-          <div className="authors">
-            {meta.authors.map(data => (
-              <Author key={data.name} {...data} />
-            ))}
-          </div>
-          <Container small wide overflow>
-            <main>{children}</main>
-            <div className="back-button">
-              <Button href="/blog" invert>
-                <span className="icon">
-                  <ArrowLeftLong color="white" />
-                </span>{' '}
-                Back to Blog
-              </Button>
+          <Header
+            height={{ desktop: 64, mobile: 64 + 32 }}
+            shadow
+            defaultActive
+          >
+            <Navbar />
+          </Header>
+          <HeaderImage {...meta} />
+          <Head>
+            <script
+              async
+              key="amp-timeago"
+              custom-element="amp-timeago"
+              src="https://cdn.ampproject.org/v0/amp-timeago-0.1.js"
+            />
+          </Head>
+          <Container padding>
+            <h1 className="title fw6 f0">{meta.title}</h1>
+            {meta.type && (
+              <span className="post-type mute fw7">{meta.type}</span>
+            )}
+            <div className="date mute f6">
+              <time dateTime={meta.date}>
+                {formatDate(date, 'dddd, MMMM Do YYYY')} (
+                <amp-timeago
+                  width="0"
+                  height="15"
+                  datetime={meta.date}
+                  layout="responsive"
+                >
+                  .
+                </amp-timeago>
+                )
+              </time>
             </div>
+            <div className="authors">
+              {meta.authors.map(data => (
+                <Author key={data.name} {...data} />
+              ))}
+            </div>
+            <Container small wide overflow>
+              <main>{children}</main>
+              <div className="back-button">
+                <Button href="/blog" invert>
+                  <span className="icon">
+                    <ArrowLeftLong color="white" />
+                  </span>{' '}
+                  Back to Blog
+                </Button>
+              </div>
+            </Container>
           </Container>
-        </Container>
-        <Footer />
-        <style jsx>{`
-          .title {
-            text-align: center;
-          }
-          .date {
-            margin-top: 2rem;
-            text-align: center;
-          }
-          amp-timeago {
-            display: inline;
-          }
-          .authors {
-            margin: 1.5rem 0 4rem;
-            text-align: center;
-          }
-          .back-button {
-            margin-top: 8rem;
-          }
-          .icon {
-            line-height: 0;
-            vertical-align: middle;
-          }
-          .post-type {
-            display: block;
-            text-align: center;
-            text-transform: uppercase;
-            font-size: 12px;
-            color: #0070f3;
-          }
-          // CSS only media query for mobile
-          @media screen and (max-width: 640px) {
-            .authors {
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-              margin-left: -1rem;
-              margin-right: -1rem;
-            }
+          <Footer />
+          <style jsx>{`
             .title {
               text-align: center;
             }
             .date {
-              margin-top: 1rem;
+              margin-top: 2rem;
               text-align: center;
             }
-          }
-        `}</style>
-      </Page>
-    </MDXProvider>
-  );
-};
+            amp-timeago {
+              display: inline;
+            }
+            .authors {
+              margin: 1.5rem 0 4rem;
+              text-align: center;
+            }
+            .back-button {
+              margin-top: 8rem;
+            }
+            .icon {
+              line-height: 0;
+              vertical-align: middle;
+            }
+            .post-type {
+              display: block;
+              text-align: center;
+              text-transform: uppercase;
+              font-size: 12px;
+              color: #0070f3;
+            }
+            // CSS only media query for mobile
+            @media screen and (max-width: 640px) {
+              .authors {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-left: -1rem;
+                margin-right: -1rem;
+              }
+              .title {
+                text-align: center;
+              }
+              .date {
+                margin-top: 1rem;
+                text-align: center;
+              }
+            }
+          `}</style>
+        </Page>
+      </MDXProvider>
+    );
+  });

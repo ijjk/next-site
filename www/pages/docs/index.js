@@ -1,3 +1,4 @@
+import { withAmp } from 'next/amp';
 import { SkipNavContent } from '@reach/skip-nav';
 
 import Page from '../../components/page';
@@ -10,7 +11,7 @@ import Documentation, { components } from '../../components/docs/documentation';
 
 const Content = withPure(() => <Markdown components={components} />);
 
-export default () => (
+export default withAmp(() => (
   <>
     <Sidebar headings={headings} mobile />
     <Page>
@@ -22,4 +23,4 @@ export default () => (
       </Container>
     </Page>
   </>
-);
+));
