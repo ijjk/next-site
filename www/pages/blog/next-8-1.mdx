@@ -7,6 +7,7 @@ import { TerminalInput } from '../../components/text/terminal'
 export default withPost({ ...meta })
 
 Today, we're excited to announce we've extended the Next.js experience to authoring AMP pages.
+
 - [What is AMP](#what-is-amp)
 - [AMP in Next.js](#amp-in-next.js)
 - [Hybrid AMP pages](#hybrid-amp-pages)
@@ -38,6 +39,7 @@ Today, we're excited to announce we've extended the Next.js experience to author
 Hybrid AMP pages allow you to have an accompanying AMP version of a traditional page so search engines can show the AMP version of the page in the mobile search results while maintaining the existing version of the page. This enables the use of AMP into your application while still making use of Next.js features like client-side routing for the main user experience.
 
 To opt-in to a hybrid AMP page use the `withAmp` function while providing the `hybrid: true` option:
+
 ```js
 // pages/index.js
 function HomePage() {
